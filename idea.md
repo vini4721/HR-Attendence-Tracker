@@ -183,22 +183,11 @@ Stores all leave requests made by employees.
 
 ---
 
-## 🗓️ Timeline (Tentative)
-
-| **Phase** | **Duration** | **Tasks** |
-|------------|---------------|-----------|
-| Week 1 | Requirement Gathering & Design | UI wireframes, database schema |
-| Week 2 | Frontend Development | React components, basic routing |
-| Week 3 | Backend Development | REST APIs, database connection |
-| Week 4 | Integration & Testing | End-to-end testing, debugging |
-| Week 5 | Final Submission | Documentation, demo video, deployment |
-
----
 
 ## ✅ Final Deliverables
 
-- Complete source code (Frontend + Backend).  
-- Working demo or hosted link.  
+- Complete source code (Frontend + Backend).
+- Working demo or hosted link.
 - Database schema diagram.  
 - This documentation file (`HR_Attendance_Tracker_Documentation.md`).  
 - Presentation / PPT (for evaluation).  
