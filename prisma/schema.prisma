@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  username  String    @unique
+  email     String    @unique
+  password  String
+  role      String    @default("employee") 
+  createdAt DateTime  @default(now())
+}
+
+model Employee {
+  id           Int           @id @default(autoincrement())
+  name         String
+  email        String         @unique
+  phone        String?
+  position     String?
+  salary       Float?
+  department   Department?    @relation(fields: [departmentId], references: [id])
+  departmentId Int?
+  attendance   Attendance[]
+  leaves       Leave[]
+  payrolls     Payroll[]
+  userId       Int?
+  createdAt    DateTime       @default(now())
+}
+
+model Department {
+  id         Int         @id @default(autoincrement())
+  name       String       @unique
+  employees  Employee[]
+  createdAt  DateTime     @default(now())
+}
+
+model Attendance {
+  id          Int        @id @default(autoincrement())
+  date        DateTime   @default(now())
+  status      String     
+  employee    Employee   @relation(fields: [employeeId], references: [id])
+  employeeId  Int
+}
+
+model Leave {
+  id          Int        @id @default(autoincrement())
+  type        String     
+  startDate   DateTime
+  endDate     DateTime
+  status      String     @default("Pending") 
+  employee    Employee   @relation(fields: [employeeId], references: [id])
+  employeeId  Int
+}
+
+model Payroll {
+  id          Int        @id @default(autoincrement())
+  month       String
+  year        Int
+  amount      Float
+  paidOn      DateTime?  
+  employee    Employee   @relation(fields: [employeeId], references: [id])
+  employeeId  Int
+}
